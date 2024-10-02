@@ -17,6 +17,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -48,11 +51,17 @@ public class TodoService {
         );
     }
 
-    public Page<TodoResponse> getTodos(int page, int size) {
+    public Page<TodoResponse> getTodos(int page, int size, String weather, LocalDate startDate, LocalDate endDate) {
         Pageable pageable = PageRequest.of(page - 1, size);
-
-        Page<Todo> todos = todoRepository.findAllByOrderByModifiedAtDesc(pageable);
-
+        /*
+        * 참고 : https://batory.tistory.com/508
+        * LocalDate값을 LocalDateTime 값으로 변환
+        * 입력값이 2024-09-01 이면 2024-09-01 00:00:00으로 변환
+        * 기간 끝은 하루 더해서 자정값으로 변환 repository에서 < 으로 처리
+        * */
+        LocalDateTime startDateTime = (startDate != null) ? startDate.atStartOfDay() : null;
+        LocalDateTime endDateTime = (endDate != null) ? endDate.plusDays(1).atStartOfDay() : null;
+        Page<Todo> todos = todoRepository.findTodosByCondition(weather, startDateTime, endDateTime, pageable);
         return todos.map(todo -> new TodoResponse(
                 todo.getId(),
                 todo.getTitle(),
