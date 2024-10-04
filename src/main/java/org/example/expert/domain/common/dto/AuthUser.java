@@ -15,6 +15,11 @@ public class AuthUser {
     private final String email;
     private final String nickname;
     private final UserRole userRole;
+
+    /*
+    * 권한 목록을 저장하는데 사용
+    * GrantedAuthority -> Spring Security에서 사용자의 권한을 나타내는 인터페이스
+    * 저장하고자 하는 권한 문자열 값을 SimpleGrantedAuthority 생성자 파라미터에 넣어주면 된다.*/
     private final Collection<? extends GrantedAuthority> authorities;
 
     public AuthUser(Long id, String email, String nickname, UserRole userRole) {

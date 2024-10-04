@@ -49,8 +49,10 @@ public class JwtSecurityFilter extends OncePerRequestFilter {
                     AuthUser authUser = new AuthUser(userId, email, nickname, userRole);
 
                     JwtAuthenticationToken authenticationToken = new JwtAuthenticationToken(authUser);
+
                     authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpRequest));
                     SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+
                 }
             } catch (SecurityException | MalformedJwtException e) {
                 log.error("Invalid JWT signature, 유효하지 않는 JWT 서명 입니다.", e);
