@@ -15,13 +15,11 @@ public enum UserRole {
     private final String userRole;
 
     public static UserRole of(String role) {
-        String formattedRole = role.startsWith("ROLE_") ? role : "ROLE_" + role;
         return Arrays.stream(UserRole.values())
-                .filter(r -> r.name().equalsIgnoreCase(formattedRole))
+                .filter(r -> r.name().equalsIgnoreCase(role))
                 .findFirst()
-                .orElseThrow(() -> new InvalidRequestException("유효하지 않은 UserRole"));
+                .orElseThrow(() -> new InvalidRequestException("유효하지 않은 UerRole"));
     }
-
 
     public static class Authority {
         public static final String USER = "ROLE_USER";
