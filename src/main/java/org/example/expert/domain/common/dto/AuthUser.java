@@ -14,7 +14,6 @@ public class AuthUser {
     private final Long id;
     private final String email;
     private final String nickname;
-    private final UserRole userRole;
 
     /*
     * 권한 목록을 저장하는데 사용
@@ -26,7 +25,6 @@ public class AuthUser {
         this.id = id;
         this.email = email;
         this.nickname = nickname;
-        this.userRole = userRole;
         this.authorities = List.of(new SimpleGrantedAuthority(userRole.name()));
     }
 }
