@@ -72,7 +72,6 @@ public class TodoRepositoryCustomImpl implements TodoRepositoryCustom {
                         ))
                 .from(todo)
                 .where(builder)
-                .leftJoin(todo.user, user)
                 .orderBy(todo.createdAt.desc())
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
