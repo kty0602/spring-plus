@@ -35,8 +35,8 @@ public class TodoService {
     public TodoSaveResponse saveTodo(AuthUser authUser, TodoSaveRequest todoSaveRequest) {
         User user = User.fromAuthUser(authUser);
 
-        // String weather = weatherClient.getTodayWeather();
-        String weather = null;
+         String weather = weatherClient.getTodayWeather();
+//        String weather = null;
 
         try {
             if(weather == null) {

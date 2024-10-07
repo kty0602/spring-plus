@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.example.expert.config.PasswordEncoder;
 import org.example.expert.domain.common.exception.InvalidRequestException;
 import org.example.expert.domain.user.dto.request.UserChangePasswordRequest;
+import org.example.expert.domain.user.dto.response.UserGetResponse;
 import org.example.expert.domain.user.dto.response.UserResponse;
 import org.example.expert.domain.user.entity.User;
 import org.example.expert.domain.user.repository.UserRepository;
@@ -21,6 +22,24 @@ public class UserService {
     public UserResponse getUser(long userId) {
         User user = userRepository.findById(userId).orElseThrow(() -> new InvalidRequestException("User not found"));
         return new UserResponse(user.getId(), user.getEmail());
+    }
+
+    // jpa 사용
+    public UserGetResponse getUser1(String nickname) {
+        User user = userRepository.findByNickname(nickname).orElseThrow(() -> new InvalidRequestException("해당 유저가 없습니다."));
+        return new UserGetResponse(user.getId(), user.getEmail(), user.getNickname());
+    }
+
+    // jpql 사용
+    public UserGetResponse getUser2(String nickname) {
+        User user = userRepository.checkJPQLUser(nickname).orElseThrow(() -> new InvalidRequestException("해당 유저가 없습니다."));
+        return new UserGetResponse(user.getId(), user.getEmail(), user.getNickname());
+    }
+
+    // querydsl 사용
+    public UserGetResponse getUser3(String nickname) {
+        User user = userRepository.checkDSLUser(nickname).orElseThrow(() -> new InvalidRequestException("해당 유저가 없습니다."));
+        return new UserGetResponse(user.getId(), user.getEmail(), user.getNickname());
     }
 
     @Transactional

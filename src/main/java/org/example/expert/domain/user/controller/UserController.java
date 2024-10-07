@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.example.expert.domain.common.annotation.Auth;
 import org.example.expert.domain.common.dto.AuthUser;
 import org.example.expert.domain.user.dto.request.UserChangePasswordRequest;
+import org.example.expert.domain.user.dto.response.UserGetResponse;
 import org.example.expert.domain.user.dto.response.UserResponse;
 import org.example.expert.domain.user.service.UserService;
 import org.springframework.http.ResponseEntity;
@@ -24,5 +25,18 @@ public class UserController {
     @PutMapping("/users")
     public void changePassword(@AuthenticationPrincipal AuthUser authUser, @RequestBody UserChangePasswordRequest userChangePasswordRequest) {
         userService.changePassword(authUser.getId(), userChangePasswordRequest);
+    }
+
+    @GetMapping("/users/check1/{nickname}")
+    public ResponseEntity<UserGetResponse> getUser1(@PathVariable("nickname") String nickname) {
+        return ResponseEntity.ok(userService.getUser1(nickname));
+    }
+    @GetMapping("/users/check2/{nickname}")
+    public ResponseEntity<UserGetResponse> getUser2(@PathVariable("nickname") String nickname) {
+        return ResponseEntity.ok(userService.getUser2(nickname));
+    }
+    @GetMapping("/users/check3/{nickname}")
+    public ResponseEntity<UserGetResponse> getUser3(@PathVariable("nickname") String nickname) {
+        return ResponseEntity.ok(userService.getUser3(nickname));
     }
 }

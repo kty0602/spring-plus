@@ -4,6 +4,7 @@ import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.example.expert.domain.comment.entity.QComment;
 import org.example.expert.domain.todo.dto.response.TodoSearchResponse;
 import org.example.expert.domain.todo.entity.QTodo;
@@ -20,7 +21,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class TodoRepositoryCustomImpl implements TodoRepositoryCustom {
     private final JPAQueryFactory jpaQueryFactory;
 
