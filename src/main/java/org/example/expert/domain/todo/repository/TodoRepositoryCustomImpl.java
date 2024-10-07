@@ -42,7 +42,6 @@ public class TodoRepositoryCustomImpl implements TodoRepositoryCustom {
     public Page<TodoSearchResponse> searchTodos(String title, LocalDateTime startDate, LocalDateTime endDate, String nickname, Pageable pageable) {
         QTodo todo = QTodo.todo;
         QUser user = QUser.user;
-        QComment comment = QComment.comment;
 
         // 동적 조건을 위한 BooleanBuilder 생성
         BooleanBuilder builder = new BooleanBuilder();
@@ -68,13 +67,12 @@ public class TodoRepositoryCustomImpl implements TodoRepositoryCustom {
         List<TodoSearchResponse> results = jpaQueryFactory
                 .select(Projections.constructor(TodoSearchResponse.class,
                         todo.title,
-                        todo.managers.size().as("managerCount"),
-                        todo.comments.size().as("commentCount")
+                        todo.managers.size(),
+                        todo.comments.size()
                         ))
                 .from(todo)
-                .leftJoin(todo.user, user)
-                .leftJoin(todo.comments, comment)
                 .where(builder)
+                .leftJoin(todo.user, user)
                 .orderBy(todo.createdAt.desc())
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
