@@ -67,6 +67,7 @@ public class TodoRepositoryCustomImpl implements TodoRepositoryCustom {
 
         List<TodoSearchResponse> results = jpaQueryFactory
                 .select(Projections.constructor(TodoSearchResponse.class,
+                        todo.id,
                         todo.title,
                         todo.managers.size(),
                         todo.comments.size()
