@@ -21,25 +21,25 @@ public class UserService {
 
     public UserResponse getUser(long userId) {
         User user = userRepository.findById(userId).orElseThrow(() -> new InvalidRequestException("User not found"));
-        return new UserResponse(user.getId(), user.getEmail());
+        return new UserResponse(user.getId(), user.getEmail(), user.getLink());
     }
 
     // jpa 사용
     public UserGetResponse getUser1(String nickname) {
         User user = userRepository.findByNickname(nickname).orElseThrow(() -> new InvalidRequestException("해당 유저가 없습니다."));
-        return new UserGetResponse(user.getId(), user.getEmail(), user.getNickname());
+        return new UserGetResponse(user.getId(), user.getEmail(), user.getNickname(), user.getLink());
     }
 
     // jpql 사용
     public UserGetResponse getUser2(String nickname) {
         User user = userRepository.checkJPQLUser(nickname).orElseThrow(() -> new InvalidRequestException("해당 유저가 없습니다."));
-        return new UserGetResponse(user.getId(), user.getEmail(), user.getNickname());
+        return new UserGetResponse(user.getId(), user.getEmail(), user.getNickname(), user.getLink());
     }
 
     // querydsl 사용
     public UserGetResponse getUser3(String nickname) {
         User user = userRepository.checkDSLUser(nickname).orElseThrow(() -> new InvalidRequestException("해당 유저가 없습니다."));
-        return new UserGetResponse(user.getId(), user.getEmail(), user.getNickname());
+        return new UserGetResponse(user.getId(), user.getEmail(), user.getNickname(), user.getLink());
     }
 
     @Transactional

@@ -59,7 +59,7 @@ public class TodoService {
                     savedTodo.getTitle(),
                     savedTodo.getContents(),
                     weather,
-                    new UserResponse(user.getId(), user.getEmail())
+                    new UserResponse(user.getId(), user.getEmail(), user.getLink())
             );
         } catch (InvalidRequestException e) {
             logService.saveLog("일정 등록", "FAIL");
@@ -83,7 +83,7 @@ public class TodoService {
                 todo.getTitle(),
                 todo.getContents(),
                 todo.getWeather(),
-                new UserResponse(todo.getUser().getId(), todo.getUser().getEmail()),
+                new UserResponse(todo.getUser().getId(), todo.getUser().getEmail(), todo.getUser().getLink()),
                 todo.getCreatedAt(),
                 todo.getModifiedAt()
         ));
@@ -100,7 +100,7 @@ public class TodoService {
                 todo.getTitle(),
                 todo.getContents(),
                 todo.getWeather(),
-                new UserResponse(user.getId(), user.getEmail()),
+                new UserResponse(user.getId(), user.getEmail(), user.getLink()),
                 todo.getCreatedAt(),
                 todo.getModifiedAt()
         );
