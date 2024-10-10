@@ -56,7 +56,7 @@ public class UserData  {
             if (!nicknames.contains(nickname)) {
                 nicknames.add(nickname);
 
-                User newUser = new User(email, passwordEncoder.encode(password), nickname, UserRole.ROLE_USER);
+                User newUser = new User(email, passwordEncoder.encode(password), nickname, UserRole.ROLE_USER, "Ss");
                 userRepository.save(newUser);
             }
         }

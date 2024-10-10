@@ -42,7 +42,7 @@ public class WebSecurityConfig {
                 .httpBasic(AbstractHttpConfigurer::disable) // BasicAuthenticationFilter 비활성화
                 .logout(AbstractHttpConfigurer::disable) // LogoutFilter 비활성화
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/**", "/upload/**").permitAll()
+                        .requestMatchers("/auth/**", "/upload/**", "/health").permitAll()
                         .requestMatchers("/test").hasAuthority(UserRole.Authority.ADMIN)
                         .anyRequest().authenticated()
                 )
