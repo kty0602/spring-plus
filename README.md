@@ -1,6 +1,8 @@
 # SPRING PLUS
 ## 내일배움캠프 스프링 플러스 심화 개인과제
 
+## 12 EC2 헬스체크 확인용 
+http://3.36.166.174:8080/health
 
 ## 13 대용량 데이터 처리 <JPA, JPQL, QueryDSL> 비교 img
 
