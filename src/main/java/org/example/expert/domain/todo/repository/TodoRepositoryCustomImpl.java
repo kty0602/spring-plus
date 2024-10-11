@@ -82,6 +82,7 @@ public class TodoRepositoryCustomImpl implements TodoRepositoryCustom {
         long total = jpaQueryFactory
                 .select(todo.count())
                 .from(todo)
+                .where(builder)
                 .fetchOne();
 
         return new PageImpl<>(results, pageable, total);
